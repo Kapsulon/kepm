@@ -94,7 +94,7 @@ tput setaf 6
 echo "=> Cleaning installation..."
 tput init
 sudo rm -rf /tmp/kepm
-sudo rm -f /usr/local/lib/kepm/kepm
+sudo rm -rf /usr/local/lib/kepm/kepm
 if [ $? -ne 0 ]; then
     tput setaf 1
     echo "=> Unable to clean installation."

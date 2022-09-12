@@ -73,7 +73,7 @@ def check_bubulle() -> bool:
         print("Bubulle not found, do you want to install it ?")
         ask = inquirer.prompt([inquirer.Confirm("install", message="Install bubulle ?")])
         if ask["install"]:
-            system("git clone https://github.com/aureliancnx/Bubulle-Norminette.git")
+            git.Git(install_path).clone("https://github.com/aureliancnx/Bubulle-Norminette.git")
             print("Bubulle installed")
             with open("error_catcher_patch", "r") as patch:
                 f = open(install_path + "Bubulle-Norminette/bubulle-py/utils/error_handling.py", "w")

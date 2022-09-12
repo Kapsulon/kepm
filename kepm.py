@@ -67,6 +67,17 @@ def edit_project():
     print("Project file found.")
     print("Project name: " + get_project_name())
     choice = ask_for_choice("What do you want to do?", ["Edit project name", "Check norm errors", "Quit"])
+    if choice == "Edit project name":
+        create_kepm_file()
+    elif choice == "Check norm errors":
+        check_norm()
+    elif choice == "Quit":
+        exit(0)
+
+def check_norm():
+    if not check_bubulle():
+        return
+    system(install_path + "Bubulle-Norminette/bubulle-py/bubulle.py -p .")
 
 def check_bubulle() -> bool:
     if not glob(install_path + "Bubulle-Norminette/VERSION"):

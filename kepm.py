@@ -75,7 +75,7 @@ def edit_project():
         exit(0)
 
 def check_norm():
-    system(install_path + "Bubulle-Norminette/bubulle-py/bubulle.py -p .")
+    system("python " + install_path + "Bubulle-Norminette/bubulle-py/bubulle.py -p .")
 
 def check_bubulle() -> bool:
     if not glob(install_path + "Bubulle-Norminette/VERSION"):
@@ -116,6 +116,8 @@ def check_bubulle() -> bool:
             else:
                 print("Bubulle not updated.")
                 return False
+        else:
+            return True
 
 def check_version():
     with open(install_path + "VERSION", "r") as f:

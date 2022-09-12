@@ -4,7 +4,7 @@
 if [[ $EUID -ne 0 ]]; then
     echo "\033[0;31mThe installation must be run as root."
     echo "\033[0;31mPlease enter your password:\033[0m"
-    sudo "$0" "sudo sh -c \"$(curl -fsSL https://raw.githubusercontent.com/Kapsulon/kepm/main/install_script.sh)\""
+    sudo "$0" "curl https://raw.githubusercontent.com/Kapsulon/kepm/main/install_script.sh | sudo sh"
     exit $?
 fi
 

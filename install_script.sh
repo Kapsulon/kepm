@@ -14,6 +14,10 @@ if [ -d "/tmp/kepm" ]; then
     rm -rf /tmp/kepm
 fi
 
+if [ -d "/usr/local/lib/kepm" ]; then
+    rm -r /usr/local/lib/kepm
+fi
+
 if [ $? -ne 0 ]; then
     tput setaf 1
     echo "=> Unable to clean temporary files."

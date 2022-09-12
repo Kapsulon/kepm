@@ -66,14 +66,14 @@ def edit_project():
     choice = ask_for_choice("What do you want to do?", ["Edit project name", "Check norm errors", "Quit"])
 
 def check_bubulle() -> bool:
-    if not glob("Bubulle-Norminette/VERSION"):
+    if not glob("./Bubulle-Norminette/VERSION"):
         print("Bubulle not found, do you want to install it ?")
         ask = inquirer.prompt([inquirer.Confirm("install", message="Install bubulle ?")])
         if ask["install"]:
             system("git clone https://github.com/aureliancnx/Bubulle-Norminette.git")
             print("Bubulle installed")
             with open("error_catcher_patch", "r") as patch:
-                f = open("Bubulle-Norminette/bubulle-py/utils/error_handling.py", "w")
+                f = open("./Bubulle-Norminette/bubulle-py/utils/error_handling.py", "w")
                 content = patch.read()
                 f.write(content)
                 f.close()
@@ -84,13 +84,13 @@ def check_bubulle() -> bool:
             print("Bubulle not installed.")
             return False
     else:
-        version = open("Bubulle-Norminette/VERSION", "r").read()
+        version = open("./Bubulle-Norminette/VERSION", "r").read()
         latest = requests.get("https://raw.githubusercontent.com/aureliancnx/Bubulle-Norminette/master/VERSION")
         if version != latest.text:
             print("Bubulle is outdated. Do you want to update it ?")
             ask = inquirer.prompt([inquirer.Confirm("update", message="Update bubulle ?")])
             if ask["update"]:
-                system("cd Bubulle-Norminette/ && git pull")
+                system("cd ./Bubulle-Norminette/ && git pull")
                 print("Bubulle updated")
                 with open("error_catcher_patch", "r") as patch:
                     f = open("Bubulle-Norminette/bubulle-py/utils/error_handling.py", "w")

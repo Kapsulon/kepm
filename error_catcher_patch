@@ -1,0 +1,74 @@
+import re
+
+import args_handler
+from .string_utils import Colors
+import json
+from glob import glob
+from os import system
+
+errors = []
+args = None
+
+class BuError:
+    """Class to handle errors."""
+
+    def __init__(self, path, file_name, error_id, level, line, message):
+        self.path = path
+        self.file_name = file_name
+        self.error_id = error_id
+        self.level = level
+        self.line = line
+        self.message = message
+
+    def print_error(self):
+        try:
+            if not isinstance(self.file_name, str):
+                self.file_name = self.file_name[0]
+
+            # custom segment
+            if not glob(".errors.json"):
+                open(".errors.json", "w").write("{}")
+            f = open(".errors.json", "r")
+            data = json.loads(f.read())
+            f.close()
+            if not data:
+                data = {}
+            if not data.get(self.file_name):
+                data[self.file_name] = {}
+            if not data[self.file_name].get(self.error_id):
+                data[self.file_name][self.error_id] = []
+            data[self.file_name][self.error_id].append(self.line)
+            f = open(".errors.json", "w")
+            f.write(json.dumps(data, indent=4))
+            f.close()
+
+        except Exception as e:
+            print(e)
+
+
+class BuErrors:
+    @staticmethod
+    def split_on_empty_lines(string):
+        blank_line_regex = r"(?:\r?\n){2,}"
+        return re.split(blank_line_regex, string.strip())
+
+    @staticmethod
+    def print_error(string, file_name, line, level, errid, message):
+        if not can_print_error(level, errid):
+            return
+
+        error = BuError(string, file_name, errid, level, line, message)
+        errors.append(error)
+        error.print_error()
+
+
+def can_print_error(level, errid):
+    if errid.lower() in args_handler.ignored_tests:
+        return 0
+    if level == 0 and args.ignore_info:
+        return 0
+    if level == 1 and args.ignore_minor:
+        return 0
+    if level == 2 and args.ignore_major:
+        return 0
+    return 1

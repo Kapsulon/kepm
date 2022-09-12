@@ -75,8 +75,6 @@ def edit_project():
         exit(0)
 
 def check_norm():
-    if not check_bubulle():
-        return
     system(install_path + "Bubulle-Norminette/bubulle-py/bubulle.py -p .")
 
 def check_bubulle() -> bool:

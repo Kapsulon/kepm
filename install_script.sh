@@ -1,3 +1,4 @@
+#!/bin/bash
 # Check if the user is root.
 # If it's not, run the installation as root.
 if [[ $EUID -ne 0 ]]; then

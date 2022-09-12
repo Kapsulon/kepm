@@ -8,3 +8,5 @@ curl https://raw.githubusercontent.com/Kapsulon/kepm/main/install_script.sh | su
 ```
 ## Using KEPM
 If everything went right with the install, you will be able to type "kepm" in the terminal from anywhere, you will then be able to use it as a tool to speed up your workflow.
+
+You can use it to generate files with automatic headers, adjust certain norm errors automatically, automatic Makefile content and/or output a bubulle report in a json file.

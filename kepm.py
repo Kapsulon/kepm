@@ -75,7 +75,7 @@ def check_bubulle() -> bool:
         if ask["install"]:
             git.Git(install_path).clone("https://github.com/aureliancnx/Bubulle-Norminette.git")
             print("Bubulle installed")
-            with open("error_catcher_patch", "r") as patch:
+            with open(install_path + "error_catcher_patch", "r") as patch:
                 f = open(install_path + "Bubulle-Norminette/bubulle-py/utils/error_handling.py", "w")
                 content = patch.read()
                 f.write(content)
@@ -96,7 +96,7 @@ def check_bubulle() -> bool:
                 g = git.cmd.Git(install_path + "Bubulle-Norminette")
                 g.pull()
                 print("Bubulle updated")
-                with open("error_catcher_patch", "r") as patch:
+                with open(install_path + "error_catcher_patch", "r") as patch:
                     f = open(install_path + "Bubulle-Norminette/bubulle-py/utils/error_handling.py", "w")
                     content = patch.read()
                     f.write(content)

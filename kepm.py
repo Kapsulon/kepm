@@ -104,7 +104,22 @@ def check_bubulle() -> bool:
                 print("Bubulle not updated.")
                 return False
 
+def check_version():
+    with open("VERSION", "r") as f:
+        version = f.read()
+        f.close()
+    latest = requests.get("https://raw.githubusercontent.com/Kapsulon/kepm/main/VERSION")
+    if version != latest.text:
+        print("You are not using the latest version of KEPM. Do you want to update it ?")
+        ask = inquirer.prompt([inquirer.Confirm("update", message="Update KEPM ?")])
+        if ask["update"]:
+            system("sudo sh -c '$(curl -fsSL https://raw.githubusercontent.com/Kapsulon/kepm/main/install_script.sh)'")
+            print("KEPM updated")
+        else:
+            print("KEPM not updated.")
+
 def main():
+    check_version()
     check_bubulle()
     action = ask_for_choice("What do you want to do?", ["Create a new project", "Edit an existing project", "Quit"])
     if action == "Create a new project":

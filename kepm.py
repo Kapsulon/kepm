@@ -124,9 +124,9 @@ def check_bubulle() -> bool:
             return True
 
 def check_version():
-    with open(install_path + "VERSION", "r") as f:
-        version = f.read()
-        f.close()
+    f = open(install_path + "VERSION", "r")
+    version = f.read()
+    f.close()
     latest = requests.get("https://raw.githubusercontent.com/Kapsulon/kepm/main/VERSION")
     if version != latest.text:
         print("You are not using the latest version of KEPM. Do you want to update it ?")

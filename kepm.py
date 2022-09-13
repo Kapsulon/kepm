@@ -77,6 +77,17 @@ def edit_project():
 def check_norm():
     system("python " + install_path + "Bubulle-Norminette/bubulle-py/bubulle.py -p .")
 
+def patch_file(patch, file):
+    with open(patch, "r") as p:
+        with open(file, "w") as f:
+            content = p.read()
+            f.write(content)
+            f.close()
+            p.close()
+
+def patch_bubulle():
+    patch_file(install_path + "error_catcher_patch", install_path + "Bubulle-Norminette/bubulle-py/utils/error_handling.py")
+
 def check_bubulle() -> bool:
     if not glob(install_path + "Bubulle-Norminette/VERSION"):
         print("Bubulle not found, do you want to install it ?")
@@ -84,12 +95,7 @@ def check_bubulle() -> bool:
         if ask["install"]:
             git.Git(install_path).clone("https://github.com/aureliancnx/Bubulle-Norminette.git")
             print("Bubulle installed")
-            with open(install_path + "error_catcher_patch", "r") as patch:
-                f = open(install_path + "Bubulle-Norminette/bubulle-py/utils/error_handling.py", "w")
-                content = patch.read()
-                f.write(content)
-                f.close()
-                patch.close()
+            patch_bubulle()
             print("Bubulle patched")
             return True
         else:
@@ -105,12 +111,7 @@ def check_bubulle() -> bool:
                 g = git.cmd.Git(install_path + "Bubulle-Norminette")
                 g.pull()
                 print("Bubulle updated")
-                with open(install_path + "error_catcher_patch", "r") as patch:
-                    f = open(install_path + "Bubulle-Norminette/bubulle-py/utils/error_handling.py", "w")
-                    content = patch.read()
-                    f.write(content)
-                    f.close()
-                    patch.close()
+                patch_bubulle()
                 print("Bubulle patched")
                 return True
             else:

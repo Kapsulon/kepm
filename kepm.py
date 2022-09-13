@@ -130,6 +130,7 @@ def check_version():
     latest = requests.get("https://raw.githubusercontent.com/Kapsulon/kepm/main/VERSION")
     if version != latest.text:
         print("You are not using the latest version of KEPM. Do you want to update it ?")
+        print(f"Current version: {version}, Latest version: {latest.text}")
         ask = inquirer.prompt([inquirer.Confirm("update", message="Update KEPM ?")])
         if ask["update"]:
             g = git.cmd.Git(install_path)

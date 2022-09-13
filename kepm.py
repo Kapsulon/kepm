@@ -78,6 +78,8 @@ def edit_project():
         exit(0)
 
 def check_norm():
+    if glob(".errors.json"):
+        system("rm .errors.json")
     system("python " + install_path + "Bubulle-Norminette/bubulle-py/bubulle.py -p .")
 
 def patch_file(patch, file):

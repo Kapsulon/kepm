@@ -4,8 +4,11 @@ from os import system
 from glob import glob
 import requests
 import git
+from pyfiglet import Figlet
 
 install_path = "/usr/local/lib/kepm/"
+
+print(Figlet(font="slant").renderText("KEPM"))
 
 print("Welcome to Kapsulon's Epitech Project Manager")
 print("This program will help you to create a new project or edit an existing one\n")

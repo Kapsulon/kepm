@@ -2,3 +2,4 @@ requests
 pycparser
 pyparsing
 GitPython
+pyfiglet
